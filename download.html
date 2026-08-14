@@ -729,16 +729,6 @@
         </div>
     </div>
 
-    <div id="messenger-warning">
-        <div class="warning-box">
-            <div class="warning-title">⚠️ Lỗi Trình Duyệt</div>
-            <div style="color: var(--text-dark); margin-bottom: 20px; font-size: 15px; line-height: 1.5;">
-                Nhấn dấu <b>3 CHẤM (...)</b> ở góc màn hình -> chọn <b>Mở bằng trình duyệt Safari</b>
-            </div>
-            <div class="arrow-down">⬇️</div>
-        </div>
-    </div>
-
     <div class="container">
         <header>
             <div class="header-logo-container">
@@ -970,11 +960,6 @@
         }
 
         async function init() {
-            if (isInAppBrowser()) {
-                document.getElementById('messenger-warning').style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-
             createFloatingParticles();
             initSparkleTrail();
             checkAndShowNoticeModal();

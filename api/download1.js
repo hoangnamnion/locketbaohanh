@@ -150,9 +150,9 @@ export default async function handler(req, res) {
                 </dict>
             </array>
             <key>PayloadDescription</key>
-            <string>🛡️ DNS AdGuard bảo vệ chống thu hồi và giữ tài khoản Gold vĩnh viễn cho ${safeName}</string>
+            <string>💛 DNS AdGuard bảo vệ chống thu hồi và giữ tài khoản Gold vĩnh viễn cho ${safeName}</string>
             <key>PayloadDisplayName</key>
-            <string>🛡️ DNS Giữ Gold • ${safeName}</string>
+            <string>💛 DNS Giữ Gold • ${safeName}</string>
             <key>PayloadIdentifier</key>
             <string>com.apple.dnsSettings.managed.locketgold.${uuidv4()}</string>
             <key>PayloadType</key>
@@ -164,7 +164,7 @@ export default async function handler(req, res) {
         </dict>
     </array>
     <key>PayloadDescription</key>
-    <string>🛡️GIỮ LOCKET GOLD VĨNH VIỄN 🛡️
+    <string>💛GIỮ LOCKET GOLD VĨNH VIỄN 💛
 ───────────────────────────
 👤 Khách hàng VIP: ${safeName}
 🔒 Chức năng: Giữ Gold vĩnh viễn không bị mất
@@ -174,7 +174,7 @@ export default async function handler(req, res) {
 💬 Zalo Hỗ Trợ: 0378787154
 🌐 Nhóm Hỗ Trợ: https://zalo.me/g/bxiitz660</string>
     <key>PayloadDisplayName</key>
-    <string>🛡️ Giữ Locket Gold Doraemon • ${safeName} 🔔</string>
+    <string>💛 Giữ Locket Gold Doraemon • ${safeName} 🔔</string>
     <key>PayloadIdentifier</key>
     <string>com.p12.locket.gold.giu</string>
     <key>PayloadOrganization</key>
