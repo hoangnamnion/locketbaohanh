@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cổng Nâng Cấp Locket Gold - CAO VĂN NAM | Doraemon VIP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #009fe8;
+            --deep-blue: #0072bc;
+            --sky-blue: #38bdf8;
+            --accent-red: #ff334b;
+            --bell-yellow: #ffcc00;
+            --bell-gold: #f59e0b;
+            --bg-light: #e8f4fc;
+            --card-bg: rgba(255, 255, 255, 0.55);
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --success-green: #10b981;
+            --glass-border: 2px solid rgba(255, 255, 255, 0.85);
+            --glass-shadow: 0 12px 35px rgba(0, 159, 232, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 25px 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('/img/background-hero.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.85;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-gradient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(232, 244, 252, 0.7) 0%, rgba(186, 230, 253, 0.5) 50%, rgba(232, 244, 252, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-logo-container {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .header-logo {
+            width: 85px;
+            height: 85px;
+            border-radius: 26px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(253, 224, 71, 0.35));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 15px 35px rgba(0, 159, 232, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 3.5px solid #ffffff;
+            outline: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .vip-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(0, 159, 232, 0.8), rgba(0, 114, 188, 0.9));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            box-shadow: 0 8px 25px rgba(0, 159, 232, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.4);
+            border: 2px solid #ffffff;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0072bc, #009fe8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .sub-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 24px;
+            padding: 26px 20px;
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-prefix {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 800;
+            color: #0072bc;
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 18px 16px 42px;
+            font-size: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--text-dark);
+            font-weight: 700;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary-blue);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 0 4px rgba(0, 159, 232, 0.25);
+        }
+
+        .user-preview {
+            display: none;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1.5px solid #ffffff;
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 6px 18px rgba(0, 159, 232, 0.1);
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--bell-yellow);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: #e2e8f0;
+        }
+
+        .user-name {
+            font-weight: 800;
+            font-size: 15px;
+            color: #0072bc;
+        }
+
+        .user-tag {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .btn-kick {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(0, 159, 232, 0.9), rgba(0, 114, 188, 0.95));
+            backdrop-filter: blur(12px);
+            border: 2px solid #ffffff;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 159, 232, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.5);
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-kick:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(0, 159, 232, 0.5);
+        }
+
+        .btn-kick:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Result Boxes */
+        .result-box {
+            display: none;
+            margin-top: 20px;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .result-success {
+            background: rgba(236, 253, 245, 0.9);
+            border: 2px solid #10b981;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+        }
+
+        .result-error {
+            background: rgba(255, 241, 242, 0.92);
+            border: 2px solid var(--accent-red);
+            box-shadow: 0 10px 25px rgba(255, 51, 75, 0.2);
+        }
+
+        .error-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--accent-red);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .error-msg {
+            font-size: 14px;
+            color: #991b1b;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-zalo {
+            background: #0068ff;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(0, 104, 255, 0.3);
+        }
+
+        .btn-group {
+            background: #ffffff;
+            color: #0072bc;
+            border: 1.5px solid rgba(0, 159, 232, 0.4);
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .success-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #047857;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .success-msg {
+            font-size: 14px;
+            color: #065f46;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            animation: floatUpAndFade linear forwards;
+        }
+
+        @keyframes floatUpAndFade {
+            0% { transform: translateY(0) scale(0.6) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.85; }
+            85% { opacity: 0.85; }
+            100% { transform: translateY(-105vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            from { transform: scale(0.95); }
+            to { transform: scale(1.1); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #0072bc;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="bg-gradient-glow"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-logo-container">
+                <img src="/img/giphy.gif" alt="Locket Logo" class="header-logo">
+            </div>
+            <div class="vip-badge">
+                <span>🔔</span>
+                Hệ Thống Tự Động - CAO VĂN NAM 🐱
+            </div>
+            <h1>KÍCH LOCKET GOLD VIP</h1>
+            <div class="sub-desc">Nhập Username để kích hoạt Locket Gold tự động</div>
+        </header>
+
+        <div class="glass-card">
+            <div class="input-group">
+                <span class="input-prefix">@</span>
+                <input id="usernameInput" placeholder="nhập_username_locket..." autocomplete="off" spellcheck="false" />
+            </div>
+
+            <div id="userPreview" class="user-preview">
+                <img id="previewAvatar" src="/img/logo-locket.png" class="user-avatar" alt="Avatar">
+                <div>
+                    <div id="previewName" class="user-name">Đang tìm...</div>
+                    <div id="previewTag" class="user-tag">Tài khoản Locket</div>
+                </div>
+            </div>
+
+            <button id="kickBtn" class="btn-kick" onclick="handleKickGold()">🚀 KÍCH HOẠT LOCKET GOLD NGAY 🔔</button>
+
+            <!-- Khung báo lỗi -->
+            <div id="errorBox" class="result-box result-error">
+                <div class="error-title">⚠️ THÔNG BÁO TỪ HỆ THỐNG</div>
+                <div id="errorMsg" class="error-msg">ib qua admin hoặc mua gói đi đừng có ăn gian nhé bé yêu 😜</div>
+                <a href="https://zalo.me/0378787154" target="_blank" class="btn-contact btn-zalo">
+                    💬 Nhắn Tin Mua Gói Với Admin (0378787154)
+                </a>
+                <a href="https://zalo.me/g/bxiitz660" target="_blank" class="btn-contact btn-group">
+                    👥 Tham Gia Nhóm Hỗ Trợ Zalo ›
+                </a>
+            </div>
+
+            <!-- Khung báo thành công -->
+            <div id="successBox" class="result-box result-success">
+                <div class="success-icon">🎉✨</div>
+                <div class="success-title">KÍCH GOLD THÀNH CÔNG!</div>
+                <div id="successMsg" class="success-msg">
+                    Chúc mừng bạn đã nâng cấp Locket Gold VIP thành công! Mở app Locket để tận hưởng chuông vàng và video 10s nhé!
+                </div>
+                <a href="/download.html" class="btn-contact btn-zalo">
+                    ⬇️ Tải Profile Kích Video 10s HD
+                </a>
+                <a href="/download1.html" class="btn-contact btn-group">
+                    🛡️ Tải Profile Giữ Gold Vĩnh Viễn
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            👑 Phát hành bởi: <b>CAO VĂN NAM</b> • Zalo: <b>0378787154</b>
+        </footer>
+    </div>
+
+    <script>
+        const API_BASE = (location.hostname === '127.0.0.1' || location.hostname === 'localhost') 
+          ? 'https://lkhoangnem.vercel.app' 
+          : '';
+
+        let lookupTimeout = null;
+
+        function createFloatingParticles() {
+            const symbols = ['🔔', '✨', '🎈', '🥞', '⭐', '⚡', '🐱'];
+            setInterval(() => {
+                if (document.hidden) return;
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                const startX = Math.random() * window.innerWidth;
+                const duration = 6 + Math.random() * 6;
+                const fontSize = 14 + Math.random() * 14;
+                
+                particle.style.left = startX + 'px';
+                particle.style.bottom = '-30px';
+                particle.style.fontSize = fontSize + 'px';
+                particle.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => { particle.remove(); }, duration * 1000);
+            }, 800);
+        }
+
+        // Live lookup khi người dùng gõ username
+        document.getElementById('usernameInput').addEventListener('input', (e) => {
+            const val = e.target.value.trim().replace(/^@/, '');
+            clearTimeout(lookupTimeout);
+
+            document.getElementById('errorBox').style.display = 'none';
+            document.getElementById('successBox').style.display = 'none';
+
+            if (!val || val.length < 3) {
+                document.getElementById('userPreview').style.display = 'none';
+                return;
+            }
+
+            lookupTimeout = setTimeout(async () => {
+                try {
+                    const res = await fetch('https://locketgold.caovannamutt.workers.dev/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'info', username: val })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        document.getElementById('previewName').innerText = data.name || val;
+                        document.getElementById('previewTag').innerText = '@' + val;
+                        document.getElementById('previewAvatar').src = data.avatar || '/img/logo-locket.png';
+                        document.getElementById('userPreview').style.display = 'flex';
+                    } else {
+                        document.getElementById('userPreview').style.display = 'none';
+                    }
+                } catch {
+                    document.getElementById('userPreview').style.display = 'none';
+                }
+            }, 400);
+        });
+
+        async function handleKickGold() {
+            const input = document.getElementById('usernameInput');
+            const btn = document.getElementById('kickBtn');
+            const username = input.value.trim().replace(/^@/, '');
+
+            if (!username) {
+                alert('Vui lòng nhập Username Locket của bạn!');
+                input.focus();
+                return;
+            }
+
+            const errorBox = document.getElementById('errorBox');
+            const successBox = document.getElementById('successBox');
+            const errorMsg = document.getElementById('errorMsg');
+            const successMsg = document.getElementById('successMsg');
+
+            errorBox.style.display = 'none';
+            successBox.style.display = 'none';
+
+            btn.innerHTML = '⏳ Đang kiểm tra & kích hoạt Gold...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(API_BASE + '/api/kick', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    throw new Error('Lỗi phản hồi máy chủ: ' + text.substring(0, 100));
+                }
+
+                if (!res.ok || !data.success) {
+                    errorBox.style.display = 'block';
+                    errorMsg.innerHTML = data.error || 'ib qua admin hoặc mua gói đi đừng có ăn gian nhé bé yêu 😜';
+                    return;
+                }
+
+                // Thành công
+                successBox.style.display = 'block';
+                successMsg.innerHTML = `Chúc mừng <b>${data.name}</b> (@${data.username}) đã được kích hoạt <b>Locket Gold VIP</b> thành công! Hãy mở app Locket lên và kiểm tra nhé! ✨`;
+
+                if (window.confetti) {
+                    confetti({
+                        particleCount: 150,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        colors: ['#009fe8', '#ffcc00', '#10b981', '#ffffff']
+                    });
+                }
+
+            } catch (err) {
+                errorBox.style.display = 'block';
+                errorMsg.innerHTML = 'Lỗi kết nối máy chủ: ' + err.message;
+            } finally {
+                btn.innerHTML = '🚀 KÍCH HOẠT LOCKET GOLD NGAY 🔔';
+                btn.disabled = false;
+            }
+        }
+
+        createFloatingParticles();
+    </script>
+</body>
+</html>

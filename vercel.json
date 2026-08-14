@@ -1,16 +1,20 @@
 {
   "rewrites": [
     {
+      "source": "/gold",
+      "destination": "/gold.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
       "source": "/d/:id",
       "destination": "/download.html?id=:id"
     },
     {
       "source": "/d1/:id",
       "destination": "/download1.html?id=:id"
-    },
-    {
-      "source": "/:id([a-zA-Z0-9]{4,8})",
-      "destination": "/download.html?id=:id"
     }
   ]
 }
