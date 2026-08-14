@@ -41,15 +41,6 @@ export default async function handler(req, res) {
           error: 'ib qua admin hoặc mua gói đi đừng có ăn gian nhé bé yêu'
         });
       }
-
-      // NẾU ĐÃ KÍCH TRƯỚC ĐÓ RỒI
-      if (whitelistItem.status === 'activated') {
-        return res.status(400).json({
-          success: false,
-          alreadyActivated: true,
-          error: `Tài khoản @${cleanUser} đã được kích hoạt Gold thành công trước đó rồi nhé!`
-        });
-      }
     }
   }
 
