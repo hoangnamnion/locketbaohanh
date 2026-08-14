@@ -433,31 +433,37 @@ async function createLink() {
   if (!name) { alert("Vui lòng nhập tên khách hàng!"); return; }
 
   // Khóa nút bấm
-  btn.innerHTML = "⏳ Đang tạo...";
+  btn.innerHTML = "⏳ Đang tạo link siêu ngắn...";
   btn.disabled = true;
 
   try {
     const res = await fetch("/api/create", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ name, durationMinutes })
+      body: JSON.stringify({ name, durationMinutes, type: selectedType })
     });
 
     if (!res.ok) throw new Error("API đang lỗi (" + res.status + "), vui lòng chờ giây lát rồi thử lại.");
 
     const data = await res.json();
-    if (!data || !data.data) throw new Error("Không lấy được dữ liệu từ hệ thống.");
+    if (!data || (!data.id && !data.data)) throw new Error("Không lấy được dữ liệu từ hệ thống.");
 
-    const encodedData = encodeURIComponent(data.data);
-    const fullLink10s = location.origin + "/download.html?data=" + encodedData;
-    const fullLinkGiuGold = location.origin + "/download1.html?data=" + encodedData;
+    // Ưu tiên Shortlink dạng /d/k7x9 và /d1/k7x9 (hoặc fallback Base64 nếu chưa có KV)
+    let fullLink10s = "";
+    let fullLinkGiuGold = "";
 
-    const decodedData = JSON.parse(safeDecodeBase64(data.data));
-    const expTime = decodedData.exp;
+    if (data.id) {
+      fullLink10s = `${location.origin}/d/${data.id}`;
+      fullLinkGiuGold = `${location.origin}/d1/${data.id}`;
+    } else {
+      const encodedData = encodeURIComponent(data.data);
+      fullLink10s = `${location.origin}/download.html?data=${encodedData}`;
+      fullLinkGiuGold = `${location.origin}/download1.html?data=${encodedData}`;
+    }
 
+    const expTime = data.exp || (Date.now() + durationMinutes * 60 * 1000);
     const durationLabel = durationMinutes >= 60 ? (durationMinutes / 60 + " giờ") : (durationMinutes + " phút");
     const vipMessage = buildVipMessage(name, fullLink10s, fullLinkGiuGold, durationLabel, selectedType);
-
     const primaryLink = (selectedType === 'giugold') ? fullLinkGiuGold : fullLink10s;
 
     const resultDiv = document.getElementById("result");
@@ -470,7 +476,7 @@ async function createLink() {
       <div style="background: rgba(232, 244, 252, 0.88); border: 1.5px solid rgba(0, 159, 232, 0.3); padding: 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; text-align: left; white-space: pre-wrap; margin-bottom: 15px; color: var(--text-main); font-weight: 500;">${vipMessage}</div>
 
       <button onclick="copyVipMessage('${encodeURIComponent(name)}', '${encodeURIComponent(fullLink10s)}', '${encodeURIComponent(fullLinkGiuGold)}', '${durationLabel}', '${selectedType}')" class="btn-primary" style="margin-bottom: 10px;">📋 Copy Tin Nhắn VIP Gửi Khách</button>
-      <button onclick="copyText('${primaryLink}')" class="btn-success">📋 Copy Link Tải Nhanh</button>
+      <button onclick="copyText('${primaryLink}')" class="btn-success">📋 Copy Link Tải Siêu Ngắn</button>
       <div id="timeRemaining" class="countdown" style="margin-top: 15px;">⏳ Đang tính thời gian...</div>
     `;
 

@@ -795,7 +795,20 @@
 
     <script>
         const params = new URLSearchParams(location.search);
-        let data = params.get("data");
+        let idParam = params.get("id");
+        let dataParam = params.get("data");
+        
+        // Trích xuất id nếu URL dạng /d/k7x9 hoặc /k7x9
+        if (!idParam && !dataParam) {
+            const pathParts = location.pathname.split('/').filter(Boolean);
+            if (pathParts.length > 0) {
+                const lastPart = pathParts[pathParts.length - 1];
+                if (lastPart && !lastPart.includes('.html')) {
+                    idParam = lastPart;
+                }
+            }
+        }
+
         let timerInterval;
 
         function isInAppBrowser() {
@@ -936,7 +949,6 @@
         }
 
         async function init() {
-            // Chặn in-app browser
             if (isInAppBrowser()) {
                 document.getElementById('messenger-warning').style.display = 'flex';
                 document.body.style.overflow = 'hidden';
@@ -946,38 +958,39 @@
             initSparkleTrail();
             checkAndShowNoticeModal();
 
-            if (!data) return showError("❌ LINK KHÔNG HỢP LỆ");
+            if (!idParam && !dataParam) return showError("❌ LINK KHÔNG HỢP LỆ");
 
             try {
-                let decoded = JSON.parse(safeAtob(data));
+                let clientName = "Khách Hàng";
+                let expTime = Date.now() + 15 * 60 * 1000;
 
-                // Thay tên động
-                document.getElementById("greetingBox").innerHTML = `Xin chào, <b>${decoded.name}</b> 👋<br>Đây là hướng dẫn kích hoạt dành riêng cho bạn.`;
-                document.getElementById("footerText").innerHTML = `<p>Link này dành riêng cho ${decoded.name}.</p>`;
+                // 1. Thử lấy thông tin qua API (hỗ trợ cả id Redis và data Base64)
+                const queryParam = idParam ? `id=${encodeURIComponent(idParam)}` : `data=${encodeURIComponent(dataParam)}`;
+                const infoRes = await fetch(`/api/info?${queryParam}`);
+                
+                if (infoRes.ok) {
+                    const info = await infoRes.json();
+                    clientName = info.name || "Khách Hàng";
+                    expTime = info.exp;
+                } else if (dataParam) {
+                    // Fallback giải mã trực tiếp nếu API info chưa phản hồi
+                    const decoded = JSON.parse(safeAtob(dataParam));
+                    clientName = decoded.name;
+                    expTime = decoded.exp;
+                } else {
+                    const err = await infoRes.json().catch(() => ({ error: 'Link không hợp lệ hoặc đã hết hạn' }));
+                    return showError(`❌ ${err.error || 'LIÊN KẾT ĐÃ HẾT HẠN'}`);
+                }
 
-                // Kiểm tra hết hạn
-                if (Date.now() > decoded.exp) {
+                document.getElementById("greetingBox").innerHTML = `Xin chào, <b>${clientName}</b> 👋<br>Đây là hướng dẫn kích hoạt dành riêng cho bạn.`;
+                document.getElementById("footerText").innerHTML = `<p>Link này dành riêng cho ${clientName}.</p>`;
+
+                if (Date.now() > expTime) {
                     return showError("❌ LIÊN KẾT ĐÃ HẾT HẠN<br><span style='font-size: 13px; font-weight: normal; color: var(--accent-red);'>Vui lòng liên hệ Admin CAO VĂN NAM để lấy link mới.</span>");
                 }
 
-                // Kiểm tra thiết bị
-                const fp = getFingerprint();
-                if (!decoded.devices) {
-                    decoded.devices = [fp];
-                    data = btoa(JSON.stringify(decoded));
-                } else {
-                    if (!decoded.devices.includes(fp)) {
-                        if (decoded.devices.length >= 2) {
-                            return showError("❌ LINK ĐÃ ĐẠT GIỚI HẠN THIẾT BỊ<br><span style='font-size: 13px; font-weight: normal; color: var(--accent-red);'>Mỗi link chỉ hỗ trợ tối đa 2 thiết bị.</span>");
-                        }
-                        decoded.devices.push(fp);
-                        data = btoa(JSON.stringify(decoded));
-                    }
-                }
-
-                // Bật nút tải và đếm ngược
-                setupDownloadButton(decoded.name);
-                startCountdown(decoded.exp);
+                setupDownloadButton(clientName);
+                startCountdown(expTime);
 
             } catch (e) {
                 showError("❌ DỮ LIỆU KHÔNG HỢP LỆ");
@@ -994,48 +1007,31 @@
             if(timerInterval) clearInterval(timerInterval);
         }
 
-        function sendTelegramNotify(customerName, pageType) {
-            const botToken = "8236266375:AAGh1GzjPa9sRb0iouBX0FsrcljPFK1vd9w";
-            const chatIds = ["6754356446"];
-            const now = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
-
-            const text = `📥 ⚡ KHÁCH VỪA BẤM TẢI PROFILE LOCKET ⚡
-───────────────────────
-👤 Khách hàng: ${customerName || 'Khách Vô Danh'}
-⏱️ Thời gian: ${now} 
-📱 Trang tải: ${pageType}
-🌐 Trình duyệt: ${navigator.platform || 'iOS Device'}`;
-
-            chatIds.forEach(chatId => {
-                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    keepalive: true,
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: text
-                    })
-                }).catch(err => console.log("Telegram Notify Error:", err));
-            });
-        }
-
         function setupDownloadButton(customerName) {
             const btn = document.getElementById("downloadBtn");
             btn.style.display = "block";
             btn.onclick = () => {
-                sendTelegramNotify(customerName, "Trang 10s (download.html)");
-                fetch("/api/download?data=" + data, {
+                const targetUrl = idParam ? `/api/download?id=${encodeURIComponent(idParam)}` : `/api/download?data=${encodeURIComponent(dataParam)}`;
+                
+                btn.innerHTML = "⏳ Đang tải profile...";
+                fetch(targetUrl, {
                     headers: { "x-fp": getFingerprint() }
                 })
                 .then(res => {
-                    if(!res.ok) throw new Error("Lỗi tải");
+                    if(!res.ok) throw new Error("Lỗi tải hoặc link đã hết hạn");
                     return res.blob();
                 })
                 .then(blob => {
                     const url = URL.createObjectURL(blob);
                     window.location.href = url;
+                    setTimeout(() => {
+                        btn.innerHTML = "⬇️ Tải Profile Locket VIP";
+                    }, 2000);
                 })
-                .catch(err => alert("Có lỗi xảy ra hoặc link đã quá hạn."));
+                .catch(err => {
+                    alert(err.message || "Có lỗi xảy ra hoặc link đã quá hạn.");
+                    btn.innerHTML = "⬇️ Tải Profile Locket VIP";
+                });
             };
         }
 
