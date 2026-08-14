@@ -493,20 +493,49 @@
       });
     }
 
+    function extractUsername(raw) {
+      if (!raw) return '';
+      let str = String(raw).trim();
+
+      // 1. Tìm đường dẫn locket.cam/<username>
+      const linkMatch = str.match(/locket\.cam\/([a-zA-Z0-9_.-]+)/i);
+      if (linkMatch && linkMatch[1]) {
+        return linkMatch[1].replace(/[?#].*$/, '').toLowerCase().trim();
+      }
+
+      // 2. Tìm theo @username
+      const atMatch = str.match(/@([a-zA-Z0-9_.-]+)/);
+      if (atMatch && atMatch[1]) {
+        return atMatch[1].toLowerCase().trim();
+      }
+
+      // 3. Chuỗi đơn / làm sạch
+      let clean = str.replace(/https?:\/\//gi, '').replace(/^@/, '').trim();
+      const wordMatch = clean.match(/[a-zA-Z0-9_.-]+/);
+      return wordMatch ? wordMatch[0].toLowerCase() : clean.toLowerCase();
+    }
+
+    // Tự động làm sạch input khi admin paste link
+    document.getElementById('addUsername').addEventListener('change', (e) => {
+      const clean = extractUsername(e.target.value);
+      if (clean) e.target.value = clean;
+    });
+
     async function handleAddWhitelist() {
       const userInput = document.getElementById('addUsername');
       const noteInput = document.getElementById('addNote');
       const btn = document.getElementById('addBtn');
 
-      const username = userInput.value.trim().replace(/^@/, '');
+      const username = extractUsername(userInput.value);
       const note = noteInput.value.trim() || 'Khách VIP';
 
       if (!username) {
-        alert('Vui lòng nhập Username Locket!');
+        alert('Vui lòng nhập Username hoặc Link Locket!');
         userInput.focus();
         return;
       }
 
+      userInput.value = username;
       btn.innerHTML = '⏳ Đang thêm vào Whitelist...';
       btn.disabled = true;
 
