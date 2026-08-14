@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hướng Dẫn VIP 10s - CAO VĂN NAM | Doraemon Locket</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #009fe8;
+            --deep-blue: #0072bc;
+            --sky-blue: #38bdf8;
+            --accent-red: #ff334b;
+            --bell-yellow: #ffcc00;
+            --bell-gold: #f59e0b;
+            --bg-light: #e8f4fc;
+            --card-bg: rgba(255, 255, 255, 0.55);
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --accent-glow: rgba(0, 159, 232, 0.25);
+            --success-green: #10b981;
+            --glass-border: 2px solid rgba(255, 255, 255, 0.85);
+            --glass-shadow: 0 12px 35px rgba(0, 159, 232, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fixed Hero Background with Doraemon Sky Tint */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('img/background-hero.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.85;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-gradient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(232, 244, 252, 0.7) 0%, rgba(186, 230, 253, 0.5) 50%, rgba(232, 244, 252, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-logo-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .header-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 26px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(253, 224, 71, 0.35));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 15px 35px rgba(0, 159, 232, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 3.5px solid #ffffff;
+            outline: 2px solid rgba(255, 255, 255, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .header-logo-container::after {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #009fe8, #ffcc00);
+            z-index: -1;
+            opacity: 0.6;
+            animation: pulseGlow 2.5s infinite alternate;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0072bc, #009fe8, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .vip-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(0, 159, 232, 0.8), rgba(0, 114, 188, 0.9));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            padding: 7px 18px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 25px rgba(0, 159, 232, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.4);
+            border: 2px solid #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-bell {
+            font-size: 15px;
+        }
+
+        .customer-greeting {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-top: 5px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: var(--glass-border);
+            padding: 14px 18px;
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+            line-height: 1.5;
+        }
+
+        .video-wrapper-outer {
+            position: relative;
+            width: 100%;
+            border-radius: 28px;
+            padding: 4px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #009fe8, #ffcc00, #ffffff, #0072bc);
+            background-size: 300% 300%;
+            animation: rotateGradient 4s linear infinite;
+            box-shadow: 0 15px 35px rgba(0, 159, 232, 0.35);
+        }
+
+        @keyframes rotateGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: #000;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-cover {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(232, 244, 252, 0.85) 0%, rgba(186, 230, 253, 0.85) 100%), url('img/background-hero.webp');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-cover.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cover-logo {
+            width: 95px;
+            height: 95px;
+            border-radius: 28px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(253, 224, 71, 0.35));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 15px 35px rgba(0, 159, 232, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 3.5px solid #ffffff;
+            outline: 2px solid rgba(255, 255, 255, 0.6);
+            margin-bottom: 20px;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        .cover-play-btn {
+            background: linear-gradient(135deg, rgba(0, 159, 232, 0.85), rgba(0, 114, 188, 0.95));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 800;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 3px solid #ffffff;
+            box-shadow: 0 12px 35px rgba(0, 159, 232, 0.45), inset 0 0 15px rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            animation: doraPulse 2s infinite ease-in-out;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes doraPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 159, 232, 0.45); }
+            50% { transform: scale(1.05); box-shadow: 0 14px 35px rgba(0, 114, 188, 0.65); }
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 22px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 16px 40px rgba(0, 159, 232, 0.22);
+        }
+
+        .step-header { display: flex; align-items: center; margin-bottom: 10px; }
+
+        .step-number {
+            background: linear-gradient(135deg, #009fe8, #0072bc);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 15px;
+            margin-right: 12px;
+            box-shadow: 0 4px 12px rgba(0, 159, 232, 0.3);
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #0072bc;
+        }
+
+        .step-content {
+            padding-left: 44px;
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .warning-text {
+            color: var(--accent-red);
+            font-weight: 700;
+            display: block;
+            margin-top: 8px;
+            background: rgba(255, 51, 75, 0.08);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .success-text {
+            color: var(--success-green);
+            font-weight: 700;
+            display: block;
+            margin-top: 8px;
+            background: rgba(16, 185, 129, 0.08);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border-left: 3px solid var(--success-green);
+        }
+
+        .btn-action {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 14px;
+            border-radius: 14px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold, .btn-pink {
+            background: linear-gradient(135deg, #009fe8, #0072bc);
+            color: #ffffff;
+            box-shadow: 0 8px 22px rgba(0, 159, 232, 0.35);
+        }
+
+        .btn-gold:hover, .btn-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 159, 232, 0.45);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: #ffffff;
+            box-shadow: 0 8px 22px rgba(2, 132, 199, 0.35);
+        }
+
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(2, 132, 199, 0.45);
+        }
+
+        .btn-disabled {
+            background: #cbd5e1;
+            color: #94a3b8;
+            pointer-events: none;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #0072bc;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.98); opacity: 0.5; }
+            100% { transform: scale(1.04); opacity: 0.9; }
+        }
+
+        #messenger-warning {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(232, 244, 252, 0.95);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+            backdrop-filter: blur(15px);
+        }
+
+        .warning-box {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 26px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 50px rgba(0, 159, 232, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 2.5px solid #ffffff;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .warning-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .arrow-down {
+            font-size: 42px;
+            color: var(--primary-blue);
+            animation: bounce 1.5s infinite;
+            margin-top: 15px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .expired-notice {
+            border: 2px solid var(--accent-red);
+            background: rgba(255, 51, 75, 0.08);
+            padding: 16px;
+            border-radius: 16px;
+            color: var(--accent-red);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: none;
+            box-shadow: 0 6px 18px rgba(255, 51, 75, 0.15);
+        }
+
+        /* Modal Popup System Announcement */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 26px;
+            padding: 28px 22px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 159, 232, 0.35), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 2.5px solid #ffffff;
+            animation: popupIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+        }
+
+        @keyframes popupIn {
+            0% { opacity: 0; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-megaphone {
+            font-size: 45px;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulseGlow 1.8s infinite alternate;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0072bc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .modal-subhead {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-desc {
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .zalo-box {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            margin-bottom: 16px;
+            text-align: left;
+            box-shadow: 0 8px 25px rgba(0, 159, 232, 0.15), inset 0 0 12px rgba(255, 255, 255, 0.6);
+            transition: transform 0.2s ease;
+        }
+
+        .zalo-box:hover {
+            transform: translateY(-2px);
+        }
+
+        .zalo-logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0, 104, 255, 0.25);
+            flex-shrink: 0;
+        }
+
+        .zalo-text-title {
+            font-weight: 800;
+            font-size: 14px;
+            color: #0068ff;
+            margin-bottom: 2px;
+        }
+
+        .zalo-text-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .warning-note-box {
+            background: #fff1f2;
+            border-left: 4px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 12px;
+            color: var(--accent-red);
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .modal-alert-red {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-modal-primary {
+            flex: 1;
+            background: linear-gradient(135deg, #009fe8, #0072bc);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 13px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0, 159, 232, 0.35);
+        }
+
+        .btn-modal-secondary {
+            flex: 1;
+            background: #f1f5f9;
+            color: #64748b;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 13px;
+            border-radius: 14px;
+            border: 1px solid #cbd5e1;
+            cursor: pointer;
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            animation: floatUpAndFade linear forwards;
+        }
+
+        @keyframes floatUpAndFade {
+            0% {
+                transform: translateY(0) scale(0.6) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.85;
+            }
+            85% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(-105vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+            animation: sparkleFade 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            transform-origin: center center;
+        }
+
+        @keyframes sparkleFade {
+            0% {
+                transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translate(-50%, -100%) scale(1.3) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        #countdown {
+            color: var(--deep-blue);
+            font-weight: 700;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 15px;
+            background: rgba(0, 159, 232, 0.1);
+            padding: 8px 14px;
+            border-radius: 12px;
+            display: inline-block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="bg-gradient-glow"></div>
+
+    <div id="systemNoticeModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-megaphone">📢</div>
+            <div class="modal-title">THÔNG BÁO HỆ THỐNG</div>
+            <div class="modal-subhead">ĐỌC KĨ TRÁNH GẶP LỖI</div>
+            
+            <div class="modal-desc">
+                Vui lòng đọc và xem kỹ video <b>HƯỚNG DẪN</b> trước khi thao tác!
+            </div>
+
+            <a href="https://zalo.me/g/bxiitz660" target="_blank" class="zalo-box">
+                <img src="img/logozalo.jpg" alt="Zalo Logo" class="zalo-logo-img">
+                <div>
+                    <div class="zalo-text-title">Tham gia Zalo Hỗ Trợ ›</div>
+                    <div class="zalo-text-desc">Giải đáp nhanh và nhận hỗ trợ VIP</div>
+                </div>
+            </a>
+
+            <div class="warning-note-box">
+                Lưu ý: Tham gia nhóm để được bảo hành gói GOLD khi gặp lỗi, không tham gia sẽ không được áp dụng gói bảo hành 🔔
+            </div>
+            <div class="modal-alert-red">Vào Nhóm Nhớ Tắt Thông Báo Nhóm.</div>
+
+            <div class="modal-alert-red">⚠️ CÁC BẠN XEM KĨ VIDEO HƯỚNG DẪN!</div>
+
+            <div class="modal-btn-row">
+                <button class="btn-modal-primary" onclick="closeNoticeModal()">Đã hiểu</button>
+                <button class="btn-modal-secondary" onclick="hideNotice24h()">Đóng trong 24h</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="messenger-warning">
+        <div class="warning-box">
+            <div class="warning-title">⚠️ Lỗi Trình Duyệt</div>
+            <div style="color: var(--text-dark); margin-bottom: 20px; font-size: 15px; line-height: 1.5;">
+                Nhấn dấu <b>3 CHẤM (...)</b> ở góc màn hình -> chọn <b>Mở bằng trình duyệt Safari</b>
+            </div>
+            <div class="arrow-down">⬇️</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-logo-container">
+                <img src="img/logo-locket.png" alt="Locket Logo" class="header-logo">
+            </div>
+            <div class="vip-badge">
+                <span class="badge-bell">🔔</span>
+                Locket Gold Doraemon - CAO VĂN NAM 🐱
+            </div>
+            <h1>Unlock Locket VIP</h1>
+            <div class="customer-greeting" id="greetingBox">
+                Đang tải dữ liệu...
+            </div>
+        </header>
+        
+        <div id="statusNotice" class="expired-notice"></div>
+        
+        <div class="video-wrapper-outer">
+            <div class="video-wrapper">
+                <div id="videoCover" class="video-cover" onclick="playVideoWithFade()">
+                    <img src="img/giphy.gif" alt="Locket Logo" class="cover-logo">
+                    <button class="cover-play-btn">🔔 Bấm Xem Video Hướng Dẫn ✨</button>
+                </div>
+                <iframe id="guideVideo" src="https://www.youtube.com/embed/zUEHCkS39BM?enablejsapi=1&rel=0&modestbranding=1&playsinline=1&controls=1&showinfo=0" title="Hướng dẫn" allowfullscreen allow="autoplay"></iframe>
+            </div>
+        </div>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Chuẩn bị App Locket</div>
+                </div>
+                <div class="step-content">
+                    Xóa app Locket cũ và tải lại Locket mới từ AppStore.
+                    <span class="warning-text">⚠️ LƯU Ý: TẢI XONG KHÔNG ĐƯỢC MỞ APP LOCKET LÊN NGAY.</span>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Tải Cấu Hình Profile</div>
+                </div>
+                <div class="step-content">
+                    Nhấn vào nút bên dưới để tải file cấu hình.<br>
+                    <button id="downloadBtn" class="btn-action btn-gold" style="display: none;">⬇️ Tải Profile Locket VIP</button>
+                    <div id="countdown"></div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Tải Ứng Dụng VPN</div>
+                </div>
+                <div class="step-content">
+                    <a href="https://apps.apple.com/us/app/usa-vpn-private-fast/id6475051414" target="_blank" class="btn-action btn-blue">🇺🇸 Tải USA VPN (AppStore)</a>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Kích Hoạt & Tận Hưởng</div>
+                </div>
+                <div class="step-content">
+                    Bật VPN lên, vào Locket quay thử.
+                    <span class="success-text">🎉 Nếu quay thành công là đã kích hoạt xong! Xong việc nhớ xóa VPN.</span>
+                </div>
+            </div>
+        </div>
+        <footer id="footerText"></footer>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+        let data = params.get("data");
+        let timerInterval;
+
+        function isInAppBrowser() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1) || (ua.indexOf("Zalo") > -1);
+        }
+
+        function getFingerprint() {
+            const raw = [
+                navigator.userAgent,
+                navigator.language,
+                screen.width + "x" + screen.height,
+                Intl.DateTimeFormat().resolvedOptions().timeZone,
+                navigator.platform
+            ].join("|");
+            return btoa(raw);
+        }
+
+        function createFloatingParticles() {
+            const symbols = ['🔔', '✨', '🎈', '🥞', '⭐', '⚡', '🐱'];
+            setInterval(() => {
+                if (document.hidden) return;
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                const startX = Math.random() * window.innerWidth;
+                const duration = 6 + Math.random() * 6;
+                const fontSize = 14 + Math.random() * 14;
+                
+                particle.style.left = startX + 'px';
+                particle.style.bottom = '-30px';
+                particle.style.fontSize = fontSize + 'px';
+                particle.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }, 800);
+        }
+
+        function playVideoWithFade() {
+            const cover = document.getElementById("videoCover");
+            const iframe = document.getElementById("guideVideo");
+            
+            if (cover) {
+                cover.classList.add("fade-out");
+                setTimeout(() => {
+                    cover.style.display = "none";
+                }, 1000);
+            }
+
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+        }
+
+        function initSparkleTrail() {
+            const symbols = ['🔔', '✨', '⭐', '🥞', '⚡'];
+            let lastTime = 0;
+            const throttleMs = 35;
+
+            function createSparkle(x, y) {
+                const now = Date.now();
+                if (now - lastTime < throttleMs) return;
+                lastTime = now;
+
+                const el = document.createElement('div');
+                el.className = 'sparkle-trail';
+                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                const size = 14 + Math.random() * 10;
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                el.style.fontSize = size + 'px';
+
+                document.body.appendChild(el);
+
+                setTimeout(() => {
+                    el.remove();
+                }, 700);
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                createSparkle(e.clientX, e.clientY);
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches[0]) {
+                    createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches[0]) {
+                    createSparkle(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+        }
+
+        function safeAtob(str) {
+            if (!str) return "";
+            try {
+                let cleaned = decodeURIComponent(str).trim();
+                cleaned = cleaned.replace(/-/g, "+").replace(/_/g, "/");
+                while (cleaned.length % 4 !== 0) {
+                    cleaned += "=";
+                }
+                return atob(cleaned);
+            } catch (e) {
+                return atob(str);
+            }
+        }
+
+        function checkAndShowNoticeModal() {
+            const hideUntil = localStorage.getItem('systemNoticeHideUntil');
+            if (!hideUntil || Date.now() > parseInt(hideUntil, 10)) {
+                const modal = document.getElementById('systemNoticeModal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            }
+        }
+
+        function closeNoticeModal() {
+            const modal = document.getElementById('systemNoticeModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function hideNotice24h() {
+            const hideUntil = Date.now() + 24 * 60 * 60 * 1000;
+            localStorage.setItem('systemNoticeHideUntil', hideUntil.toString());
+            closeNoticeModal();
+        }
+
+        async function init() {
+            // Chặn in-app browser
+            if (isInAppBrowser()) {
+                document.getElementById('messenger-warning').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            createFloatingParticles();
+            initSparkleTrail();
+            checkAndShowNoticeModal();
+
+            if (!data) return showError("❌ LINK KHÔNG HỢP LỆ");
+
+            try {
+                let decoded = JSON.parse(safeAtob(data));
+
+                // Thay tên động
+                document.getElementById("greetingBox").innerHTML = `Xin chào, <b>${decoded.name}</b> 👋<br>Đây là hướng dẫn kích hoạt dành riêng cho bạn.`;
+                document.getElementById("footerText").innerHTML = `<p>Link này dành riêng cho ${decoded.name}.</p>`;
+
+                // Kiểm tra hết hạn
+                if (Date.now() > decoded.exp) {
+                    return showError("❌ LIÊN KẾT ĐÃ HẾT HẠN<br><span style='font-size: 13px; font-weight: normal; color: var(--accent-red);'>Vui lòng liên hệ Admin CAO VĂN NAM để lấy link mới.</span>");
+                }
+
+                // Kiểm tra thiết bị
+                const fp = getFingerprint();
+                if (!decoded.devices) {
+                    decoded.devices = [fp];
+                    data = btoa(JSON.stringify(decoded));
+                } else {
+                    if (!decoded.devices.includes(fp)) {
+                        if (decoded.devices.length >= 2) {
+                            return showError("❌ LINK ĐÃ ĐẠT GIỚI HẠN THIẾT BỊ<br><span style='font-size: 13px; font-weight: normal; color: var(--accent-red);'>Mỗi link chỉ hỗ trợ tối đa 2 thiết bị.</span>");
+                        }
+                        decoded.devices.push(fp);
+                        data = btoa(JSON.stringify(decoded));
+                    }
+                }
+
+                // Bật nút tải và đếm ngược
+                setupDownloadButton(decoded.name);
+                startCountdown(decoded.exp);
+
+            } catch (e) {
+                showError("❌ DỮ LIỆU KHÔNG HỢP LỆ");
+            }
+        }
+
+        function showError(msg) {
+            const notice = document.getElementById("statusNotice");
+            notice.style.display = "block";
+            notice.innerHTML = msg;
+
+            document.getElementById("downloadBtn").style.display = "none";
+            document.getElementById("countdown").innerHTML = "";
+            if(timerInterval) clearInterval(timerInterval);
+        }
+
+        function sendTelegramNotify(customerName, pageType) {
+            const botToken = "8236266375:AAGh1GzjPa9sRb0iouBX0FsrcljPFK1vd9w";
+            const chatIds = ["6754356446"];
+            const now = new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+
+            const text = `📥 ⚡ KHÁCH VỪA BẤM TẢI PROFILE LOCKET ⚡
+───────────────────────
+👤 Khách hàng: ${customerName || 'Khách Vô Danh'}
+⏱️ Thời gian: ${now} 
+📱 Trang tải: ${pageType}
+🌐 Trình duyệt: ${navigator.platform || 'iOS Device'}`;
+
+            chatIds.forEach(chatId => {
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    keepalive: true,
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: text
+                    })
+                }).catch(err => console.log("Telegram Notify Error:", err));
+            });
+        }
+
+        function setupDownloadButton(customerName) {
+            const btn = document.getElementById("downloadBtn");
+            btn.style.display = "block";
+            btn.onclick = () => {
+                sendTelegramNotify(customerName, "Trang 10s (download.html)");
+                fetch("/api/download?data=" + data, {
+                    headers: { "x-fp": getFingerprint() }
+                })
+                .then(res => {
+                    if(!res.ok) throw new Error("Lỗi tải");
+                    return res.blob();
+                })
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    window.location.href = url;
+                })
+                .catch(err => alert("Có lỗi xảy ra hoặc link đã quá hạn."));
+            };
+        }
+
+        function startCountdown(expTime) {
+            const display = document.getElementById("countdown");
+            timerInterval = setInterval(() => {
+                const now = Date.now();
+                const distance = expTime - now;
+
+                if (distance <= 0) {
+                    clearInterval(timerInterval);
+                    showError("❌ LIÊN KẾT ĐÃ HẾT HẠN<br><span style='font-size: 13px; font-weight: normal; color: var(--accent-red);'>Vui lòng liên hệ Admin CAO VĂN NAM để lấy link mới.</span>");
+                    return;
+                }
+
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                const formatSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.innerHTML = `⏳ Tự huỷ sau: <b>${minutes}:${formatSeconds}</b>`;
+            }, 1000);
+        }
+
+        init();
+    </script>
+</body>
+</html>

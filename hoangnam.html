@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Admin Panel - Doraemon VIP | CAO VĂN NAM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #e8f4fc;
+      --card-bg: rgba(255, 255, 255, 0.55);
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --primary: #009fe8;
+      --primary-hover: #0072bc;
+      --secondary-blue: #38bdf8;
+      --bell-yellow: #ffcc00;
+      --bell-gold: #f59e0b;
+      --success: #10b981;
+      --danger: #ff334b;
+      --border-radius: 24px;
+      --glass-border: 2px solid rgba(255, 255, 255, 0.85);
+      --glass-shadow: 0 12px 35px rgba(0, 159, 232, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: var(--bg-color);
+      padding: 20px 15px;
+      color: var(--text-main);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fixed Hero Background with Doraemon Sky Tint */
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('img/background-hero.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      opacity: 0.85;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-gradient-glow {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(232, 244, 252, 0.7) 0%, rgba(186, 230, 253, 0.5) 50%, rgba(232, 244, 252, 0.8) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .admin-header {
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-logo-container {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .header-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      object-fit: cover;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(253, 224, 71, 0.35));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 15px 35px rgba(0, 159, 232, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
+      border: 3.5px solid #ffffff;
+      outline: 2px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(0, 159, 232, 0.8), rgba(0, 114, 188, 0.9));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #ffffff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      box-shadow: 0 8px 25px rgba(0, 159, 232, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.4);
+      border: 2px solid #ffffff;
+    }
+
+    .badge-bell {
+      font-size: 14px;
+    }
+
+    .admin-title {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0072bc, #009fe8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .container, .history-container {
+      background-color: var(--card-bg);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      padding: 28px 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--glass-shadow);
+      border: var(--glass-border);
+      width: 100%;
+      max-width: 460px;
+      box-sizing: border-box;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+
+    h2 { 
+      margin-top: 0; 
+      font-size: 20px; 
+      font-weight: 800; 
+      text-align: center; 
+      margin-bottom: 20px; 
+      color: #0072bc; 
+    }
+
+    .type-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .type-btn {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      padding: 10px 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 159, 232, 0.06);
+    }
+
+    .type-btn.active {
+      background: linear-gradient(135deg, #009fe8, #0072bc);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 6px 18px rgba(0, 159, 232, 0.35);
+      transform: translateY(-2px);
+    }
+
+    input {
+      width: 100%; 
+      padding: 15px 18px; 
+      font-size: 15px; 
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      border-radius: 16px; 
+      box-sizing: border-box; 
+      margin-bottom: 18px; 
+      transition: all 0.3s ease; 
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+      color: var(--text-main); 
+      font-weight: 600; 
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(0, 159, 232, 0.25);
+    }
+
+    button {
+      padding: 15px 20px; 
+      font-size: 15px; 
+      font-weight: 700; 
+      color: #fff; 
+      border: none; 
+      border-radius: 16px; 
+      cursor: pointer; 
+      transition: all 0.25s ease; 
+      width: 100%; 
+      letter-spacing: 0.3px; 
+    }
+
+    button:active { transform: scale(0.98); }
+    button:disabled { opacity: 0.7; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+    
+    .btn-primary { 
+      background: linear-gradient(135deg, rgba(0, 159, 232, 0.85), rgba(0, 114, 188, 0.95)); 
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 159, 232, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.5); 
+    }
+    .btn-primary:hover:not(:disabled) { 
+      box-shadow: 0 14px 35px rgba(0, 159, 232, 0.5); 
+      transform: translateY(-2px); 
+    }
+
+    .btn-success { 
+      background: linear-gradient(135deg, #10b981, #059669); 
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35); 
+    }
+    .btn-success:hover { 
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45); 
+      transform: translateY(-2px); 
+    }
+
+    .btn-danger { 
+      background: linear-gradient(135deg, var(--danger), #e11d48); 
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 6px 20px rgba(255, 51, 75, 0.35); 
+    }
+    .btn-danger:hover { 
+      box-shadow: 0 8px 25px rgba(255, 51, 75, 0.45); 
+      transform: translateY(-2px); 
+    }
+
+    #result { margin-top: 25px; border-top: 1.5px dashed rgba(0, 159, 232, 0.3); padding-top: 25px; }
+    
+    .countdown { 
+      color: #0072bc; font-weight: 700; font-size: 14px; margin-top: 15px; 
+      background: rgba(255, 255, 255, 0.6); 
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid #ffffff;
+      padding: 12px; border-radius: 16px; 
+      box-shadow: 0 4px 15px rgba(0, 159, 232, 0.1);
+      text-align: center; 
+    }
+
+    .history-header-main {
+      display: flex; justify-content: space-between; align-items: center; 
+      margin-bottom: 20px; border-bottom: 1.5px solid rgba(255, 255, 255, 0.6); padding-bottom: 15px; 
+    }
+    .history-header-main h2 { margin: 0; text-align: left; }
+
+    .history-item {
+      background: rgba(255, 255, 255, 0.65); 
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px; border-radius: 18px; margin-bottom: 14px; 
+      border: 2px solid #ffffff; border-left: 6px solid var(--primary); 
+      display: flex; flex-direction: column; gap: 12px; 
+      box-shadow: 0 6px 20px rgba(0, 159, 232, 0.08), inset 0 0 12px rgba(255, 255, 255, 0.6); transition: all 0.3s ease; 
+    }
+    .history-item:hover { box-shadow: 0 8px 20px rgba(0, 159, 232, 0.14); }
+    .history-item.expired { border-left-color: var(--text-muted); opacity: 0.7; }
+    
+    .history-info { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; }
+    .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .status-active { background: rgba(16, 185, 129, 0.12); color: var(--success); }
+    .status-expired { background: rgba(108, 117, 125, 0.12); color: var(--text-muted); }
+    .type-tag { font-size: 12px; font-weight: 700; color: #0072bc; background: rgba(0, 159, 232, 0.1); padding: 3px 8px; border-radius: 8px; }
+
+    .history-actions { display: flex; gap: 8px; }
+    .btn-small { padding: 10px; font-size: 12px; flex: 1; border-radius: 12px; box-shadow: none;}
+  </style>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+<div class="bg-gradient-glow"></div>
+
+<div class="admin-header">
+  <div class="header-logo-container">
+    <img src="img/logo-locket.png" alt="Locket Logo" class="header-logo">
+  </div>
+  <div class="header-badge">
+    <span class="badge-bell">🔔</span>
+    Doraemon VIP Admin CAO VĂN NAM 🐱
+  </div>
+  <div class="admin-title">DORAEMON ADMIN PANEL</div>
+</div>
+
+<div class="container">
+  <h2>⚙️ Tạo Link Bảo Bối VIP</h2>
+  
+  <div style="margin-bottom: 12px;">
+    <label style="font-size: 13px; font-weight: 700; color: #0072bc; display: block; margin-bottom: 8px;">📦 Chọn loại liên kết:</label>
+    <div class="type-selector">
+      <div id="type_10s" class="type-btn active" onclick="selectLinkType('10s')">🎬 Kích 10s</div>
+      <div id="type_giugold" class="type-btn" onclick="selectLinkType('giugold')">🛡️ Giữ Gold</div>
+      <div id="type_combo" class="type-btn" onclick="selectLinkType('combo')">🌟 Trọn Bộ</div>
+    </div>
+  </div>
+
+  <input id="name" placeholder="Nhập tên khách hàng..." autocomplete="off" />
+  
+  <div style="margin-bottom: 20px;">
+    <label style="font-size: 13px; font-weight: 700; color: #0072bc; display: block; margin-bottom: 8px;">⏱️ Thời gian hết hạn link:</label>
+    <select id="durationSelect" style="width: 100%; padding: 14px 16px; font-size: 15px; border: 2px solid rgba(255, 255, 255, 0.85); border-radius: 16px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); font-weight: 600; color: var(--text-main); outline: none; cursor: pointer;">
+      <option value="15" selected>⏳ 15 phút (Mặc định)</option>
+      <option value="30">⏳ 30 phút</option>
+      <option value="60">⏳ 1 giờ</option>
+      <option value="1440">⏳ 24 giờ (1 ngày)</option>
+    </select>
+  </div>
+
+  <button id="createBtn" class="btn-primary" onclick="createLink()">Tạo Liên Kết Mới</button>
+  
+  <div id="result" style="display: none;"></div>
+</div>
+
+<div class="history-container">
+  <div class="history-header-main">
+    <h2 style="font-size: 18px;">📋 Lịch sử tạo link</h2>
+    <button onclick="clearHistory()" class="btn-danger" style="width: auto; padding: 8px 15px; font-size: 13px; border-radius: 12px; box-shadow: none;">Xoá Tất Cả</button>
+  </div>
+  <div id="historyList">
+  </div>
+</div>
+
+<script>
+let selectedType = '10s';
+let countdownTimer;
+document.addEventListener("DOMContentLoaded", renderHistory);
+
+function selectLinkType(type) {
+  selectedType = type;
+  document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('type_' + type).classList.add('active');
+}
+
+// Hàm chống lỗi tiếng Việt Base64
+function safeDecodeBase64(str) {
+  try { return decodeURIComponent(escape(atob(str))); }
+  catch(e) { return atob(str); }
+}
+
+function buildVipMessage(name, link10s, linkGiuGold, durationText, type) {
+  if (type === '10s') {
+    return `───────────────────────
+🔔 Xin chào ${name}!
+✨ CAO VĂN NAM đã kích hoạt bảo bối Locket 10s VIP dành riêng cho bạn!
+
+📌 Hướng dẫn kích hoạt:
+👉 Link nhận Profile:
+
+${link10s}
+
+⏳ Thời hạn liên kết: ${durationText}
+⚠️ Lưu ý: Link tự hủy sau thời hạn trên và hỗ trợ tối đa 2 thiết bị. Chúc bạn có trải nghiệm tuyệt vời cùng Doraemon Locket Gold! 🔔✨`;
+  } else if (type === 'giugold') {
+    return `───────────────────────
+🔔 Xin chào ${name}!
+✨ CAO VĂN NAM đã kích hoạt bảo bối GIỮ LOCKET GOLD VĨNH VIỄN dành riêng cho bạn!
+
+📌 Hướng dẫn kích hoạt:
+👉 Link nhận Profile Giữ Gold:
+
+${linkGiuGold}
+
+⏳ Thời hạn liên kết: ${durationText}
+⚠️ Lưu ý: Link tự hủy sau thời hạn trên và hỗ trợ tối đa 2 thiết bị. Cài profile này để giữ Gold vĩnh viễn không bị mất nhé! 🔔✨`;
+  } else {
+    return `───────────────────────
+🔔 Xin chào ${name}!
+✨ CAO VĂN NAM đã kích hoạt TRỌN BỘ LOCKET GOLD VIP dành riêng cho bạn!
+
+📌 BƯỚC 1: TẢI PROFILE KÍCH 10S
+👉 Link 1 (Kích 10s):
+${link10s}
+
+📌 BƯỚC 2: TẢI PROFILE GIỮ GOLD VĨNH VIỄN
+👉 Link 2 (Giữ Gold):
+${linkGiuGold}
+
+⏳ Thời hạn liên kết: ${durationText}
+⚠️ Lưu ý: Link tự hủy sau thời hạn trên và hỗ trợ tối đa 2 thiết bị. Chúc bạn có trải nghiệm tuyệt vời cùng Doraemon Locket Gold! 🔔✨`;
+  }
+}
+
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      throw new Error("Fallback");
+    }
+  } catch (err) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  }
+  alert("✅ Đã copy tin nhắn VIP thành công!");
+}
+
+async function createLink() {
+  const nameInput = document.getElementById("name");
+  const btn = document.getElementById("createBtn");
+  const durationSelect = document.getElementById("durationSelect");
+  
+  const name = nameInput.value.trim();
+  const durationMinutes = parseInt(durationSelect.value, 10) || 15;
+  
+  if (!name) { alert("Vui lòng nhập tên khách hàng!"); return; }
+
+  // Khóa nút bấm
+  btn.innerHTML = "⏳ Đang tạo...";
+  btn.disabled = true;
+
+  try {
+    const res = await fetch("/api/create", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ name, durationMinutes })
+    });
+
+    if (!res.ok) throw new Error("API đang lỗi (" + res.status + "), vui lòng chờ giây lát rồi thử lại.");
+
+    const data = await res.json();
+    if (!data || !data.data) throw new Error("Không lấy được dữ liệu từ hệ thống.");
+
+    const encodedData = encodeURIComponent(data.data);
+    const fullLink10s = location.origin + "/download.html?data=" + encodedData;
+    const fullLinkGiuGold = location.origin + "/download1.html?data=" + encodedData;
+
+    const decodedData = JSON.parse(safeDecodeBase64(data.data));
+    const expTime = decodedData.exp;
+
+    const durationLabel = durationMinutes >= 60 ? (durationMinutes / 60 + " giờ") : (durationMinutes + " phút");
+    const vipMessage = buildVipMessage(name, fullLink10s, fullLinkGiuGold, durationLabel, selectedType);
+
+    const primaryLink = (selectedType === 'giugold') ? fullLinkGiuGold : fullLink10s;
+
+    const resultDiv = document.getElementById("result");
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = `
+      <div style="text-align: left; margin-bottom: 10px;">
+          <span style="font-size: 13px; font-weight: 700; color: #0072bc;">✨ Xem trước tin nhắn VIP (${selectedType === 'combo' ? 'Trọn Bộ' : selectedType === 'giugold' ? 'Giữ Gold' : 'Kích 10s'}):</span>
+      </div>
+      
+      <div style="background: rgba(232, 244, 252, 0.88); border: 1.5px solid rgba(0, 159, 232, 0.3); padding: 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; text-align: left; white-space: pre-wrap; margin-bottom: 15px; color: var(--text-main); font-weight: 500;">${vipMessage}</div>
+
+      <button onclick="copyVipMessage('${encodeURIComponent(name)}', '${encodeURIComponent(fullLink10s)}', '${encodeURIComponent(fullLinkGiuGold)}', '${durationLabel}', '${selectedType}')" class="btn-primary" style="margin-bottom: 10px;">📋 Copy Tin Nhắn VIP Gửi Khách</button>
+      <button onclick="copyText('${primaryLink}')" class="btn-success">📋 Copy Link Tải Nhanh</button>
+      <div id="timeRemaining" class="countdown" style="margin-top: 15px;">⏳ Đang tính thời gian...</div>
+    `;
+
+    startCountdown(expTime);
+    saveToHistory(name, fullLink10s, fullLinkGiuGold, expTime, durationLabel, selectedType);
+    nameInput.value = ""; 
+
+  } catch (err) {
+    alert("❌ Lỗi: " + err.message);
+  } finally {
+    btn.innerHTML = "Tạo Liên Kết Mới";
+    btn.disabled = false;
+  }
+}
+
+function copyVipMessage(encodedName, encodedLink10s, encodedLinkGiuGold, durationLabel, type) {
+  const name = decodeURIComponent(encodedName);
+  const link10s = decodeURIComponent(encodedLink10s);
+  const linkGiuGold = decodeURIComponent(encodedLinkGiuGold);
+  const msg = buildVipMessage(name, link10s, linkGiuGold, durationLabel, type);
+  copyText(msg);
+}
+
+function saveToHistory(name, link10s, linkGiuGold, expTime, durationLabel, type) {
+  let history = JSON.parse(localStorage.getItem("linkHistory") || "[]");
+  history.unshift({ name, link10s, linkGiuGold, expTime, durationLabel, type });
+  localStorage.setItem("linkHistory", JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem("linkHistory") || "[]");
+  const listDiv = document.getElementById("historyList");
+  
+  if (history.length === 0) {
+    listDiv.innerHTML = `
+      <div style="text-align: center; padding: 30px 0; color: var(--text-muted);">
+        <div style="font-size: 40px; margin-bottom: 10px;">📭</div>
+        Chưa có dữ liệu nào
+      </div>`;
+    return;
+  }
+
+  listDiv.innerHTML = "";
+  history.forEach((item, index) => {
+    const isExpired = Date.now() > item.expTime;
+    const badgeClass = isExpired ? "status-expired" : "status-active";
+    const badgeText = isExpired ? "Đã Hết Hạn" : "Đang Hoạt Động";
+    const durationText = item.durationLabel || '15 phút';
+    const typeLabel = (item.type === 'combo') ? '🌟 Trọn Bộ' : (item.type === 'giugold') ? '🛡️ Giữ Gold' : '🎬 Kích 10s';
+    const primaryLink = (item.type === 'giugold') ? item.linkGiuGold : item.link10s;
+    
+    listDiv.innerHTML += `
+      <div class="history-item ${isExpired ? 'expired' : ''}">
+        <div class="history-info">
+          <div>
+            <span>🧑‍💻 ${item.name}</span>
+            <span class="type-tag" style="margin-left: 6px;">${typeLabel}</span>
+          </div>
+          <span class="status-badge ${badgeClass}">${badgeText}</span>
+        </div>
+        <div class="history-actions">
+          <button class="btn-primary btn-small" onclick="copyVipMessage('${encodeURIComponent(item.name)}', '${encodeURIComponent(item.link10s || '')}', '${encodeURIComponent(item.linkGiuGold || '')}', '${durationText}', '${item.type || '10s'}')">Copy Tin VIP</button>
+          <button class="btn-success btn-small" onclick="copyText('${primaryLink || item.link || ''}')">Copy Link</button>
+          <button class="btn-danger btn-small" onclick="deleteHistoryItem(${index})">Xoá</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function deleteHistoryItem(index) {
+  let history = JSON.parse(localStorage.getItem("linkHistory") || "[]");
+  history.splice(index, 1);
+  localStorage.setItem("linkHistory", JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory() {
+  if (confirm("⚠️ Bạn có chắc chắn muốn xoá toàn bộ lịch sử? Hành động này không thể hoàn tác.")) {
+    localStorage.removeItem("linkHistory");
+    renderHistory();
+  }
+}
+
+function startCountdown(expTime) {
+  if (countdownTimer) clearInterval(countdownTimer);
+  const display = document.getElementById("timeRemaining");
+
+  countdownTimer = setInterval(() => {
+    const now = Date.now();
+    const distance = expTime - now;
+
+    if (distance <= 0) {
+      clearInterval(countdownTimer);
+      display.innerHTML = "❌ Link đã hết hạn!";
+      display.style.color = "var(--text-muted)";
+      display.style.background = "rgba(108, 117, 125, 0.12)";
+      renderHistory(); 
+      return;
+    }
+
+    const hours = Math.floor(distance / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const formatSeconds = seconds < 10 ? "0" + seconds : seconds;
+    const formatMinutes = minutes < 10 ? "0" + minutes : minutes;
+
+    if (hours > 0) {
+      display.innerHTML = `⏳ Tự huỷ sau: <b>${hours}h ${formatMinutes}m ${formatSeconds}s</b>`;
+    } else {
+      display.innerHTML = `⏳ Tự huỷ sau: <b>${formatMinutes}:${formatSeconds}</b>`;
+    }
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
