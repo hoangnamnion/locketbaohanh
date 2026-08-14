@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAO VĂN NAM - Locket Gold Doraemon VIP | Nâng Cấp Video 10s & 15s HD</title>
+    <meta name="description" content="Dịch vụ mở khóa bảo bối Locket Gold Doraemon VIP uy tín CAO VĂN NAM. Đăng video 10s - 15s HD mượt mà, đổi huy hiệu Chuông Vàng Gold lấp lánh và hỗ trợ bảo hành 24/7.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #009fe8;
+            --deep-blue: #0072bc;
+            --sky-blue: #38bdf8;
+            --accent-red: #ff334b;
+            --bell-yellow: #ffcc00;
+            --bell-gold: #f59e0b;
+            --bg-light: #e8f4fc;
+            --card-bg: rgba(255, 255, 255, 0.55);
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --glass-border: 2px solid rgba(255, 255, 255, 0.85);
+            --glass-shadow: 0 12px 35px rgba(0, 159, 232, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.35) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(0, 159, 232, 0.3) 0%, transparent 40%),
+                              radial-gradient(circle at 50% 50%, rgba(255, 204, 0, 0.2) 0%, transparent 60%);
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(232, 244, 252, 0.7) 0%, rgba(224, 242, 254, 0.8) 100%);
+            z-index: -2;
+        }
+
+        .bg-gradient-glow {
+            position: fixed;
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(0, 159, 232, 0.3) 0%, rgba(255, 204, 0, 0.2) 45%, rgba(255, 255, 255, 0) 70%);
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            animation: pulseGlow 4s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translateX(-50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header-logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .header-logo {
+            width: 105px;
+            height: 105px;
+            border-radius: 30px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.45), rgba(253, 224, 71, 0.35));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 15px 35px rgba(0, 159, 232, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border: 3.5px solid #ffffff;
+            outline: 2px solid rgba(255, 255, 255, 0.6);
+            animation: floatLogo 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
+        }
+
+        .vip-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(135deg, rgba(0, 159, 232, 0.75), rgba(0, 114, 188, 0.85));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(0, 159, 232, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.4);
+            border: 2px solid #ffffff;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .badge-bell {
+            font-size: 16px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0072bc 0%, #009fe8 50%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 4px 15px rgba(0, 159, 232, 0.15);
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: var(--glass-border);
+            padding: 15px 20px;
+            border-radius: 22px;
+            box-shadow: var(--glass-shadow);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .cta-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .btn-cta-primary {
+            background: linear-gradient(135deg, rgba(0, 159, 232, 0.85), rgba(0, 114, 188, 0.95));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 800;
+            padding: 16px 24px;
+            border-radius: 30px;
+            border: 3px solid #ffffff;
+            box-shadow: 0 12px 35px rgba(0, 159, 232, 0.45), inset 0 0 15px rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            animation: doraPulse 2s infinite ease-in-out;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes doraPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 12px 35px rgba(0, 159, 232, 0.45); }
+            50% { transform: scale(1.04); box-shadow: 0 16px 40px rgba(0, 114, 188, 0.65); }
+        }
+
+        .btn-cta-secondary {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            color: #0072bc;
+            font-size: 15px;
+            font-weight: 800;
+            padding: 14px 20px;
+            border-radius: 22px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 8px 25px rgba(0, 159, 232, 0.18), inset 0 0 12px rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-cta-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0072bc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 420px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 22px;
+            padding: 18px 16px;
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 16px 40px rgba(0, 159, 232, 0.22);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .feature-name {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--deep-blue);
+            margin-bottom: 6px;
+        }
+
+        .feature-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .reviews-container {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 26px;
+            padding: 22px 18px;
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            margin-bottom: 30px;
+        }
+
+        .review-item {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 159, 232, 0.06);
+        }
+
+        .review-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .reviewer-name {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 13px;
+        }
+
+        .review-content {
+            font-size: 12px;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 20px 0;
+        }
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp 8s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .sparkle-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+            animation: sparkleFade 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            transform-origin: center center;
+        }
+
+        @keyframes sparkleFade {
+            0% { transform: translate(-50%, -50%) scale(0.4) rotate(0deg); opacity: 1; }
+            50% { opacity: 0.9; }
+            100% { transform: translate(-50%, -100%) scale(1.3) rotate(45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="bg-gradient-glow"></div>
+
+    <div class="main-container">
+        <header>
+            <div class="header-logo-container">
+                <img src="img/giphy.gif" alt="Locket Logo" class="header-logo">
+            </div>
+            <div>
+                <div class="vip-badge">
+                    <span class="badge-bell">🔔</span>
+                    CAO VĂN NAM - DORAEMON VIP 🐱
+                </div>
+            </div>
+            <h1>LOCKET GOLD VIP</h1>
+            <div class="hero-desc">
+                ✨ Trải nghiệm bảo bối <b>Locket Gold VIP</b> đỉnh cao! Mở khóa tính năng đăng video 10s - 15s HD cực nét, đổi màu huy hiệu Chuông Vàng Gold lấp lánh và hỗ trợ bảo hành 24/7.
+            </div>
+        </header>
+
+        <div class="cta-box">
+            <a href="https://zalo.me/0378787154" target="_blank" class="btn-cta-primary">
+                💬 MUA LOCKET GOLD NGAY (ZALO) ✨
+            </a>
+            <a href="https://zalo.me/g/bxiitz660" target="_blank" class="btn-cta-secondary">
+                <img src="img/logozalo.jpg" alt="Zalo Logo" style="width: 24px; height: 24px; border-radius: 6px; object-fit: contain;">
+                THAM GIA NHÓM HỖ TRỢ ZALO ›
+            </a>
+        </div>
+
+        <div class="section-title">
+            🔔 BẢO BỐI LOCKET GOLD NỔI BẬT 🔔
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎬</div>
+                <div class="feature-name">Video 10s & 15s HD</div>
+                <div class="feature-text">Đăng video dài mượt mà, sắc nét chuẩn HD không bị nhòe mờ.</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <div class="feature-name">Huy Hiệu Chuông Gold</div>
+                <div class="feature-text">Tên tài khoản có vệt vàng lấp lánh cực sang chảnh và nổi bật.</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-name">Kích Hoạt 1 Phút</div>
+                <div class="feature-text">Cài đặt trực tiếp trên iPhone cực nhanh không cần máy tính.</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-name">Bảo Hành Uy Tín</div>
+                <div class="feature-text">Hỗ trợ kích hoạt lại 24/7 nhanh chóng khi đổi điện thoại mới.</div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            ✨ ĐÁNH GIÁ TỪ KHÁCH HÀNG ✨
+        </div>
+
+        <div class="reviews-container">
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="reviewer-name">🔔 Thùy Trang</span>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="review-content">"CAO VĂN NAM hỗ trợ cực kỳ nhiệt tình, cài Locket 15s trong 1 phút là xong liền. Uy tín 100 điểm!"</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="reviewer-name">✨ Hoàng Nam</span>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="review-content">"Đã mua lần thứ 3 rồi, video đăng nét căng không giật lag. Giao diện Doraemon nhìn cưng xỉu luôn!"</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <span class="reviewer-name">🥞 Ngọc Mai</span>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="review-content">"Video hướng dẫn ngắn gọn dễ hiểu cực kỳ, cài phát ăn ngay, huy hiệu chuông vàng bao xịn."</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🔔 Dịch vụ CAO VĂN NAM Locket Gold Doraemon 🔔</p>
+            <p style="margin-top: 5px; font-size: 12px; color: var(--deep-blue);">Liên hệ Zalo: <b>0378787154</b></p>
+        </footer>
+    </div>
+
+    <script>
+        function createFloatingParticles() {
+            const symbols = ['🔔', '✨', '🎈', '🥞', '⭐', '⚡', '🐱'];
+            setInterval(() => {
+                if (document.hidden) return;
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                const startX = Math.random() * window.innerWidth;
+                const duration = 6 + Math.random() * 6;
+                const fontSize = 14 + Math.random() * 14;
+                
+                particle.style.left = startX + 'px';
+                particle.style.bottom = '-30px';
+                particle.style.fontSize = fontSize + 'px';
+                particle.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }, 800);
+        }
+
+        function initSparkleTrail() {
+            const symbols = ['🔔', '✨', '⭐', '🥞', '⚡'];
+            let lastTime = 0;
+            const throttleMs = 35;
+
+            function spawnSparkle(x, y) {
+                const now = Date.now();
+                if (now - lastTime < throttleMs) return;
+                lastTime = now;
+
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-trail';
+                sparkle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+
+                const size = Math.random() * 10 + 14;
+                const offsetX = (Math.random() - 0.5) * 16;
+                const offsetY = (Math.random() - 0.5) * 16;
+
+                sparkle.style.left = (x + offsetX) + 'px';
+                sparkle.style.top = (y + offsetY) + 'px';
+                sparkle.style.fontSize = size + 'px';
+
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 700);
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                spawnSparkle(e.clientX, e.clientY);
+            }, { passive: true });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches[0]) {
+                    spawnSparkle(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+        }
+
+        createFloatingParticles();
+        initSparkleTrail();
+    </script>
+</body>
+</html>
