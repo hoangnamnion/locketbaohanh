@@ -88,6 +88,8 @@ export default async function handler(req, res) {
     console.log("Telegram notify exception:", e);
   }
 
+  const safeName = String(decoded.name || 'Khách VIP').trim();
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -148,9 +150,9 @@ export default async function handler(req, res) {
                 </dict>
             </array>
             <key>PayloadDescription</key>
-            <string>Bảo bối giữ Locket Gold vĩnh viễn không bị mất</string>
+            <string>🛡️ DNS AdGuard bảo vệ chống thu hồi và giữ tài khoản Gold vĩnh viễn cho ${safeName}</string>
             <key>PayloadDisplayName</key>
-            <string>Giữ Locket Gold Doraemon - ${decoded.name}</string>
+            <string>🛡️ DNS Giữ Gold • ${safeName}</string>
             <key>PayloadIdentifier</key>
             <string>com.apple.dnsSettings.managed.locketgold.${uuidv4()}</string>
             <key>PayloadType</key>
@@ -162,15 +164,21 @@ export default async function handler(req, res) {
         </dict>
     </array>
     <key>PayloadDescription</key>
-    <string>🔔 Bảo bối Giữ Locket Gold Vĩnh Viễn
-By CAO VĂN NAM
-Zalo 0378787154</string>
+    <string>🛡️GIỮ LOCKET GOLD VĨNH VIỄN 🛡️
+───────────────────────────
+👤 Khách hàng VIP: ${safeName}
+🔒 Chức năng: Giữ Gold vĩnh viễn không bị mất
+⏳ Thời hạn bảo hộ: Vĩnh viễn
+───────────────────────────
+👑 Phát hành bởi: CAO VĂN NAM
+💬 Zalo Hỗ Trợ: 0378787154
+🌐 Nhóm Hỗ Trợ: https://zalo.me/g/bxiitz660</string>
     <key>PayloadDisplayName</key>
-    <string>🔔 Giữ Locket Gold Doraemon - ${decoded.name}</string>
+    <string>🛡️ Giữ Locket Gold Doraemon • ${safeName} 🔔</string>
     <key>PayloadIdentifier</key>
     <string>com.p12.locket.gold.giu</string>
     <key>PayloadOrganization</key>
-    <string>By CAO VĂN NAM</string>
+    <string>👑 CAO VĂN NAM • Zalo 0378787154</string>
     <key>PayloadRemovalDisallowed</key>
     <false/>
     <key>PayloadType</key>
@@ -184,7 +192,7 @@ Zalo 0378787154</string>
 
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename="${decoded.name}_Giu_Locket_Gold.mobileconfig"`
+    `attachment; filename="${safeName}_Giu_Locket_Gold.mobileconfig"`
   );
   res.setHeader("Content-Type", "application/x-apple-aspen-config");
 

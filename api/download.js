@@ -88,6 +88,8 @@ export default async function handler(req, res) {
     console.log("Telegram notify exception:", e);
   }
 
+  const safeName = String(decoded.name || 'Khách VIP').trim();
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -112,9 +114,9 @@ export default async function handler(req, res) {
       <key>OnDemandEnabled</key>
       <integer>1</integer>
       <key>PayloadDescription</key>
-      <string>Bản quyền DNS thuộc về LOCKET GOLD</string>
+      <string>⚡ Mở Video 10s HD dành riêng cho ${safeName}</string>
       <key>PayloadDisplayName</key>
-      <string>Locket Gold Doraemon - ${decoded.name}</string>
+      <string>🔔 Kích Video 10s • ${safeName}</string>
       <key>PayloadIdentifier</key>
       <string>com.nextdns.profile.797d97.hoangnamutt</string>
       <key>PayloadType</key>
@@ -126,14 +128,21 @@ export default async function handler(req, res) {
     </dict>
   </array>
   <key>PayloadDescription</key>
-  <string>
-🔔 Locket Gold Doraemon VIP - CAO VĂN NAM
-Zalo 0378787154
-</string>
+  <string>✨ BẢO BỐI LOCKET GOLD DORAEMON VIP ✨
+───────────────────────────
+👤 Khách hàng VIP: ${safeName}
+🎬 Chức năng: Mở khóa Video 10s HD &amp; Chuông Vàng
+⚡ Máy chủ: XỊN VIP NHẤT
+───────────────────────────
+👑 Phát hành bởi: CAO VĂN NAM
+💬 Zalo Hỗ Trợ: 0378787154
+🌐 Nhóm Hỗ Trợ: https://zalo.me/g/bxiitz660</string>
   <key>PayloadDisplayName</key>
-  <string>Locket Gold Doraemon - ${decoded.name}</string>
+  <string>🔔 Locket Gold 10s Doraemon • ${safeName} ✨</string>
   <key>PayloadIdentifier</key>
   <string>com.nextdns.profile.797d97</string>
+  <key>PayloadOrganization</key>
+  <string>👑 CAO VĂN NAM • Zalo 0378787154</string>
   <key>PayloadRemovalDisallowed</key>
   <false/>
   <key>PayloadType</key>
@@ -147,7 +156,7 @@ Zalo 0378787154
 
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename="${decoded.name}_Locket_10s.mobileconfig"`
+    `attachment; filename="${safeName}_Locket_10s.mobileconfig"`
   );
   res.setHeader("Content-Type", "application/x-apple-aspen-config");
 
